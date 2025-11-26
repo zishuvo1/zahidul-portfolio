@@ -6,7 +6,7 @@ menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+// ===== SMOOTH SCROLL FOR NAV LINKS =====
 const links = document.querySelectorAll('.nav-links li a');
 
 links.forEach(link => {
@@ -18,7 +18,7 @@ links.forEach(link => {
             behavior: 'smooth'
         });
 
-        // Close menu on mobile after click
+        // Close mobile menu after clicking
         if (navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
         }
