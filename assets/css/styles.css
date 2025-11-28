@@ -1,5 +1,4 @@
-/* ===== GLOBAL STYLES ===== */
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,7 +12,6 @@ body {
     line-height: 1.6;
 }
 
-/* ===== NAVBAR ===== */
 header {
     width: 100%;
     position: fixed;
@@ -58,7 +56,6 @@ header {
     color: #007bff;
 }
 
-/* ===== MOBILE MENU ===== */
 .menu-toggle {
     display: none;
     font-size: 1.5rem;
@@ -90,7 +87,6 @@ header {
     }
 }
 
-/* ===== HERO SECTION ===== */
 .hero {
     display: flex;
     flex-direction: column;
@@ -148,7 +144,6 @@ header {
     transform: translateY(-2px);
 }
 
-/* ===== SECTIONS ===== */
 .section {
     padding: 6rem 2rem 3rem 2rem;
     max-width: 1000px;
@@ -162,7 +157,6 @@ header {
     margin-bottom: 2rem;
 }
 
-/* ===== SKILLS ===== */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -187,7 +181,6 @@ header {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ===== PROJECTS ===== */
 .project-list {
     display: flex;
     flex-direction: column;
@@ -207,7 +200,6 @@ header {
     transform: translateY(-5px);
 }
 
-/* ===== EXPERIENCE & CERTIFICATIONS ===== */
 ul {
     margin-top: 1rem;
     padding-left: 1.5rem;
@@ -217,7 +209,6 @@ ul li {
     margin-bottom: 0.5rem;
 }
 
-/* ===== CONTACT ===== */
 .contact-info p {
     font-size: 1rem;
     margin-bottom: 0.75rem;
@@ -235,7 +226,6 @@ ul li {
     color: #0056b3;
 }
 
-/* ===== FOOTER ===== */
 footer {
     text-align: center;
     padding: 2rem 0;
@@ -243,7 +233,6 @@ footer {
     margin-top: 2rem;
 }
 
-/* ===== FADE-IN ANIMATION ===== */
 .fade-section {
     opacity: 0;
     transform: translateY(20px);
@@ -255,7 +244,6 @@ footer {
     transform: translateY(0);
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .skills-container {
         flex-direction: column;
