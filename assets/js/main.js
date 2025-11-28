@@ -1,4 +1,3 @@
-// ===== MOBILE MENU TOGGLE =====
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -6,7 +5,6 @@ menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// ===== SMOOTH SCROLL FOR NAV LINKS =====
 const links = document.querySelectorAll('.nav-links li a');
 
 links.forEach(link => {
@@ -18,14 +16,12 @@ links.forEach(link => {
             behavior: 'smooth'
         });
 
-        // Close mobile menu after clicking
         if (navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
         }
     });
 });
 
-// ===== FADE-IN ANIMATION ON SCROLL =====
 const sections = document.querySelectorAll('section');
 
 const observer = new IntersectionObserver(entries => {
