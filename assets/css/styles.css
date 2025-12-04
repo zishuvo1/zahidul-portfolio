@@ -1,4 +1,4 @@
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,6 +12,7 @@ body {
     line-height: 1.6;
 }
 
+/* ===== HEADER ===== */
 header {
     width: 100%;
     position: fixed;
@@ -87,6 +88,7 @@ header {
     }
 }
 
+/* ===== HERO ===== */
 .hero {
     display: flex;
     flex-direction: column;
@@ -144,6 +146,7 @@ header {
     transform: translateY(-2px);
 }
 
+/* ===== SECTION WRAPPER ===== */
 .section {
     padding: 6rem 2rem 3rem 2rem;
     max-width: 1000px;
@@ -157,6 +160,7 @@ header {
     margin-bottom: 2rem;
 }
 
+/* ===== SKILLS ===== */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -181,6 +185,7 @@ header {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* ===== PROJECTS ===== */
 .project-list {
     display: flex;
     flex-direction: column;
@@ -200,6 +205,7 @@ header {
     transform: translateY(-5px);
 }
 
+/* ===== LISTS ===== */
 ul {
     margin-top: 1rem;
     padding-left: 1.5rem;
@@ -209,6 +215,7 @@ ul li {
     margin-bottom: 0.5rem;
 }
 
+/* ===== CONTACT ===== */
 .contact-info p {
     font-size: 1rem;
     margin-bottom: 0.75rem;
@@ -226,6 +233,7 @@ ul li {
     color: #0056b3;
 }
 
+/* ===== FOOTER ===== */
 footer {
     text-align: center;
     padding: 2rem 0;
@@ -233,6 +241,7 @@ footer {
     margin-top: 2rem;
 }
 
+/* ===== FADE ANIMATION ===== */
 .fade-section {
     opacity: 0;
     transform: translateY(20px);
@@ -253,4 +262,46 @@ footer {
     .project-list {
         gap: 1rem;
     }
+}
+
+/* ===================================================== */
+/* === CERTIFICATIONS SECTION (NEWLY ADDED & FINISHED) === */
+/* ===================================================== */
+
+.certifications-section {
+    padding: 80px 0;
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.cert-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.cert-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.cert-card p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
 }
