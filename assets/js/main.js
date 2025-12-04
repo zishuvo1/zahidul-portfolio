@@ -1,3 +1,4 @@
+// ===== Mobile Menu Toggle =====
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -5,6 +6,7 @@ menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
+// ===== Smooth Scroll on Menu Click =====
 const links = document.querySelectorAll('.nav-links li a');
 
 links.forEach(link => {
@@ -12,17 +14,17 @@ links.forEach(link => {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
-        targetSection.scrollIntoView({
-            behavior: 'smooth'
-        });
 
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-        }
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+
+        navLinks.classList.remove('active');
     });
 });
 
-const sections = document.querySelectorAll('section');
+// ===== Fade-in Animation Observer =====
+const fadeItems = document.querySelectorAll(
+    'section, .skill-card, .project-card, .cert-img'
+);
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -32,7 +34,8 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.2 });
 
-sections.forEach(section => {
-    section.classList.add('fade-section');
-    observer.observe(section);
+// Add fade-section class and observe
+fadeItems.forEach(item => {
+    item.classList.add('fade-section');
+    observer.observe(item);
 });
