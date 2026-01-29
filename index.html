@@ -14,13 +14,12 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
+<body class="dark-theme">
 
     <!-- Header / Navbar -->
     <header>
         <nav class="navbar">
             <a href="#home" class="logo">Zahidul</a>
-
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -30,7 +29,6 @@
                 <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-
             <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </nav>
     </header>
@@ -58,12 +56,11 @@
     <!-- Skills Section -->
     <section id="skills" class="section">
         <h2 class="section-title">Skills</h2>
-
         <div class="skills-container">
             <div class="skill-card"><i class="fa-solid fa-tools"></i> Manual Testing</div>
             <div class="skill-card"><i class="fa-solid fa-bug"></i> Bug Reporting (JIRA, Trello)</div>
             <div class="skill-card"><i class="fa-solid fa-plug"></i> API Testing (Postman)</div>
-            <div class="skill-card"><i class="fa-solid fa-code"></i> Selenium | Java | JS | Python</div>
+            <div class="skill-card"><i class="fa-solid fa-code"></i> Selenium | Java | JavaScript | Python</div>
             <div class="skill-card"><i class="fa-solid fa-database"></i> SQL | HTML | CSS</div>
             <div class="skill-card"><i class="fa-brands fa-github"></i> Git & GitHub</div>
         </div>
@@ -72,74 +69,79 @@
     <!-- Projects Section -->
     <section id="projects" class="section">
         <h2 class="section-title">Projects</h2>
-
         <div class="project-list">
-            <div class="project-card">
-                <h3>Evershop</h3>
-                <p>E-commerce project tested for functionality, UI, and API.</p>
+
+            <div class="project-card automation">
+                <h3>Evershop Demo (Playwright + JS, API Testing)</h3>
+                <p>Automated end-to-end tests for product search, cart, checkout. Performed API testing and cross-browser testing.</p>
+                <a href="https://github.com/zishuvo1/evershop" target="_blank">View on GitHub</a>
             </div>
 
-            <div class="project-card">
-                <h3>Hisabee App</h3>
-                <p>Fintech application QA including bug tracking and regression testing.</p>
+            <div class="project-card automation">
+                <h3>Arogga (Healthcare & Pharmacy App)</h3>
+                <p>Manual testing of medicine ordering, account management, and refund workflows. Developed Playwright automation and Postman API testing.</p>
+                <a href="https://github.com/zishuvo1/arogga" target="_blank">View on GitHub</a>
             </div>
 
-            <div class="project-card">
-                <h3>Arogga</h3>
-                <p>Healthcare app tested for usability, performance, and API accuracy.</p>
+            <div class="project-card manual">
+                <h3>Mamun Academy (EdTech Platform)</h3>
+                <p>Performed manual functional/UI testing, API testing, and bug tracking using JIRA for course enrollment and payment modules.</p>
+                <a href="https://github.com/zishuvo1/mamunacademy" target="_blank">View on GitHub</a>
             </div>
 
-            <div class="project-card">
-                <h3>Mamun Academy</h3>
-                <p>Educational platform QA, manual and automation test cases executed.</p>
+            <div class="project-card automation">
+                <h3>WPPOOL QA Assignment (Cypress + JS)</h3>
+                <p>Automated end-to-end UI scenarios and practiced test automation best practices.</p>
+                <a href="https://github.com/zishuvo1/wppool" target="_blank">View on GitHub</a>
             </div>
+
+            <div class="project-card automation">
+                <h3>SauceDemo Automation (Playwright + JS)</h3>
+                <p>Built automation framework for login, product selection, cart, checkout. Implemented reusable utilities and page object patterns.</p>
+                <a href="https://github.com/zishuvo1/saucedemo-automation" target="_blank">View on GitHub</a>
+            </div>
+
         </div>
     </section>
 
     <!-- Experience Section -->
     <section id="experience" class="section">
         <h2 class="section-title">Experience</h2>
-
-        <h3>QA Trainee – Fusionsoft (June 2023 – Jan 2025)</h3>
+        <h3>QA Trainee – Fusionsoft (March 2025 – Dec 2025)</h3>
         <ul>
-            <li>Test case preparation & execution</li>
-            <li>Bug reporting & documentation</li>
-            <li>Regression, smoke & sanity testing</li>
+            <li>Test plan & case creation, execution</li>
+            <li>Bug reporting, tracking, and verification</li>
+            <li>Regression, smoke, and usability testing</li>
+            <li>Collaborated with developers and product managers to verify bug fixes</li>
         </ul>
     </section>
 
     <!-- Certifications Section -->
     <section id="certifications" class="section certifications-section">
         <h2 class="section-title">Certifications</h2>
-
         <div class="cert-grid">
-            <!-- SQA Certificate -->
+
             <div class="cert-card">
-                <img src="assets/sqa-cert.jpg" alt="SQA Certificate - Ostad Training Institute" class="cert-img" />
-                <p>SQA Certification – Ostad Training Institute (2024)</p>
+                <img src="assets/sqa-cert.jpg" alt="SQA Certificate – Ostad" />
+                <p>Software Quality Assurance (SQA) – Ostad (2024)</p>
             </div>
 
-            <!-- CEH Certificate -->
             <div class="cert-card">
-                <img src="assets/ceh-cert.jpg" alt="CEH Certificate - Creative IT Institute" class="cert-img" />
-                <p>CEH Certification – Creative IT Institute (2024)</p>
+                <img src="assets/ceh-cert.jpg" alt="CEH Certificate – Creative IT Institute" />
+                <p>Certified Ethical Hacker (CEH) – Creative IT Institute (2024)</p>
             </div>
+
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact Section -->
     <section id="contact" class="section">
         <h2 class="section-title">Contact Me</h2>
-
         <div class="contact-info">
             <p><i class="fa-solid fa-envelope"></i> zahidul0401@gmail.com</p>
             <p><i class="fa-solid fa-phone"></i> +8801611450892</p>
-            <p><i class="fa-brands fa-linkedin"></i> 
-                <a href="https://linkedin.com/in/zishuvo95" target="_blank">LinkedIn</a>
-            </p>
-            <p><i class="fa-brands fa-github"></i> 
-                <a href="https://github.com/zishuvo1" target="_blank">GitHub</a>
-            </p>
+            <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/zishuvo95" target="_blank">LinkedIn</a></p>
+            <p><i class="fa-brands fa-github"></i> <a href="https://github.com/zishuvo1" target="_blank">GitHub</a></p>
         </div>
     </section>
 
