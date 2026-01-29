@@ -1,4 +1,6 @@
-// ===== Mobile Menu Toggle =====
+// =============================
+// === MOBILE MENU TOGGLE ======
+// =============================
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -6,7 +8,9 @@ menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// ===== Smooth Scroll on Menu Click =====
+// =============================
+// === SMOOTH SCROLL ===========
+ // =============================
 const links = document.querySelectorAll('.nav-links li a');
 
 links.forEach(link => {
@@ -15,15 +19,21 @@ links.forEach(link => {
         const targetId = this.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
 
-        targetSection.scrollIntoView({ behavior: 'smooth' });
+        const offset = 70; // header height
+        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
 
         navLinks.classList.remove('active');
     });
 });
 
-// ===== Fade-in Animation Observer =====
+// =============================
+// === FADE-IN ANIMATIONS =====
+// =============================
 const fadeItems = document.querySelectorAll(
-    'section, .skill-card, .project-card, .cert-img'
+    'section, .skill-card, .project-card, .cert-card'
 );
 
 const observer = new IntersectionObserver(entries => {
@@ -38,4 +48,26 @@ const observer = new IntersectionObserver(entries => {
 fadeItems.forEach(item => {
     item.classList.add('fade-section');
     observer.observe(item);
+});
+
+// =============================
+// === ACTIVE MENU HIGHLIGHT ===
+// =============================
+const sections = document.querySelectorAll('section');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80; // header offset
+        if (pageYOffset >= sectionTop) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    links.forEach(link => {
+        link.classList.remove('active-link');
+        if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active-link');
+        }
+    });
 });
