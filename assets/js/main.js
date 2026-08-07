@@ -1,178 +1,88 @@
-```javascript
-// =============================
-// === MOBILE MENU TOGGLE ======
-// =============================
-
+// ==========================================================================
+// MOBILE MENU TOGGLE
+// ==========================================================================
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
 if (menuToggle && navLinks) {
-
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
 }
 
-
-// =============================
-// === SMOOTH SCROLL ===========
-// =============================
-
+// ==========================================================================
+// SMOOTH SCROLL WITH HEADER OFFSET
+// ==========================================================================
 const links = document.querySelectorAll('.nav-links li a');
 
 links.forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
 
-    link.addEventListener('click', function (e) {
+    // Section লিঙ্ক না হলে (যেমন: বাহিরের লিঙ্ক বা শুধুমাত্র #) আসল বিহেভিয়ার বজায় রাখবে
+    if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
 
-        e.preventDefault();
+    e.preventDefault();
+    const targetSection = document.getElementById(targetId.substring(1));
 
-        const targetId = this.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      const offset = 70; // হেডার হাইট
+      const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - offset;
 
-        if (!targetSection) {
-            return;
-        }
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
 
-        const header = document.querySelector('header');
-        const offset = header ? header.offsetHeight : 70;
-
-        const elementPosition =
-            targetSection.getBoundingClientRect().top +
-            window.pageYOffset;
-
-        const offsetPosition =
-            elementPosition - offset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-
-        // Close mobile menu
-        if (navLinks) {
-            navLinks.classList.remove('active');
-        }
-
-    });
-
-});
-
-
-// =============================
-// === FADE-IN ANIMATIONS =====
-// =============================
-
-const fadeItems = document.querySelectorAll(
-    'section, .skill-card, .project-card, .experience-card, .cert-card'
-);
-
-const observer = new IntersectionObserver(
-    entries => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add('fade-in');
-
-                // Stop observing after animation
-                observer.unobserve(entry.target);
-
-            }
-
-        });
-
-    },
-    {
-        threshold: 0.15
+      // মোবাইল মেনু অপেন থাকলে স্ক্রোল করার পর বন্ধ করে দেবে
+      if (navLinks) {
+        navLinks.classList.remove('active');
+      }
     }
-);
-
-
-// Add fade-section class and observe
-fadeItems.forEach(item => {
-
-    item.classList.add('fade-section');
-
-    observer.observe(item);
-
+  });
 });
 
+// ==========================================================================
+// FADE-IN ANIMATIONS (INTERSECTION OBSERVER)
+// ==========================================================================
+const fadeItems = document.querySelectorAll(
+  'section, .skill-card, .project-card, .cert-card'
+);
 
-// =============================
-// === ACTIVE MENU HIGHLIGHT ===
-// =============================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('fade-in');
+    }
+  });
+}, { threshold: 0.2 });
 
+// fade-section ক্লাস যুক্ত করে Observer এ ট্র্যাক করা
+fadeItems.forEach(item => {
+  item.classList.add('fade-section');
+  observer.observe(item);
+});
+
+// ==========================================================================
+// ACTIVE MENU HIGHLIGHT ON SCROLL
+// ==========================================================================
 const sections = document.querySelectorAll('section');
 
-function updateActiveMenu() {
+window.addEventListener('scroll', () => {
+  let current = '';
 
-    let current = '';
-
-    const scrollPosition = window.pageYOffset;
-
-    sections.forEach(section => {
-
-        const sectionTop =
-            section.offsetTop - 100;
-
-        const sectionBottom =
-            sectionTop + section.offsetHeight;
-
-        if (
-            scrollPosition >= sectionTop &&
-            scrollPosition < sectionBottom
-        ) {
-            current = section.getAttribute('id');
-        }
-
-    });
-
-
-    links.forEach(link => {
-
-        link.classList.remove('active-link');
-
-        const linkTarget =
-            link.getAttribute('href').substring(1);
-
-        if (linkTarget === current) {
-            link.classList.add('active-link');
-        }
-
-    });
-
-}
-
-
-// Update active menu while scrolling
-window.addEventListener('scroll', updateActiveMenu);
-
-
-// Run once when page loads
-updateActiveMenu();
-
-
-// =============================
-// === CLOSE MENU OUTSIDE ======
-// =============================
-
-document.addEventListener('click', event => {
-
-    if (!menuToggle || !navLinks) {
-        return;
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 80; // হেডার অফসেট
+    if (window.pageYOffset >= sectionTop) {
+      current = section.getAttribute('id');
     }
+  });
 
-    const clickedInsideMenu =
-        navLinks.contains(event.target);
-
-    const clickedToggle =
-        menuToggle.contains(event.target);
-
-    if (!clickedInsideMenu && !clickedToggle) {
-        navLinks.classList.remove('active');
+  links.forEach(link => {
+    link.classList.remove('active-link');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active-link');
     }
-
+  });
 });
-```
