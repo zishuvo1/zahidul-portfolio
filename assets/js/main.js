@@ -1,88 +1,238 @@
-// ==========================================================================
-// MOBILE MENU TOGGLE
-// ==========================================================================
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
+// =================================
+// MOBILE MENU
+// =================================
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
 
 if (menuToggle && navLinks) {
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+
+    menuToggle.addEventListener("click", () => {
+
+        navLinks.classList.toggle("active");
+
+        const icon = menuToggle.querySelector("i");
+
+        if (navLinks.classList.contains("active")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+
+    });
+
 }
 
-// ==========================================================================
-// SMOOTH SCROLL WITH HEADER OFFSET
-// ==========================================================================
-const links = document.querySelectorAll('.nav-links li a');
 
-links.forEach(link => {
-  link.addEventListener('click', function(e) {
-    const targetId = this.getAttribute('href');
+// =================================
+// CLOSE MOBILE MENU
+// =================================
 
-    // Section লিঙ্ক না হলে (যেমন: বাহিরের লিঙ্ক বা শুধুমাত্র #) আসল বিহেভিয়ার বজায় রাখবে
-    if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
+const navItems = document.querySelectorAll(".nav-links a");
 
-    e.preventDefault();
-    const targetSection = document.getElementById(targetId.substring(1));
+navItems.forEach(item => {
 
-    if (targetSection) {
-      const offset = 70; // হেডার হাইট
-      const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - offset;
+    item.addEventListener("click", () => {
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+        navLinks.classList.remove("active");
 
-      // মোবাইল মেনু অপেন থাকলে স্ক্রোল করার পর বন্ধ করে দেবে
-      if (navLinks) {
-        navLinks.classList.remove('active');
-      }
-    }
-  });
+        const icon = menuToggle.querySelector("i");
+
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
+
+    });
+
 });
 
-// ==========================================================================
-// FADE-IN ANIMATIONS (INTERSECTION OBSERVER)
-// ==========================================================================
-const fadeItems = document.querySelectorAll(
-  'section, .skill-card, .project-card, .cert-card'
+
+// =================================
+// ACTIVE NAVIGATION
+// =================================
+
+const sections = document.querySelectorAll("section");
+const navLinksItems = document.querySelectorAll(".nav-links a");
+
+function updateActiveNav() {
+
+    let currentSection = "";
+
+    const scrollPosition = window.scrollY + 150;
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+        ) {
+
+            currentSection = section.getAttribute("id");
+
+        }
+
+    });
+
+
+    navLinksItems.forEach(link => {
+
+        link.classList.remove("active");
+
+        const target =
+            link.getAttribute("href").substring(1);
+
+        if (target === currentSection) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll", updateActiveNav);
+
+updateActiveNav();
+
+
+// =================================
+// SCROLL REVEAL ANIMATION
+// =================================
+
+const revealElements = document.querySelectorAll(
+    ".section-heading, .about-grid, .skill-box, .timeline-item, .project-card, .education-card, .cert-card, .contact-container"
 );
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('fade-in');
-    }
-  });
-}, { threshold: 0.2 });
 
-// fade-section ক্লাস যুক্ত করে Observer এ ট্র্যাক করা
-fadeItems.forEach(item => {
-  item.classList.add('fade-section');
-  observer.observe(item);
+const revealObserver = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add("show");
+
+                revealObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },
+    {
+        threshold: 0.12
+    }
+);
+
+
+revealElements.forEach(element => {
+
+    element.classList.add("reveal");
+
+    revealObserver.observe(element);
+
 });
 
-// ==========================================================================
-// ACTIVE MENU HIGHLIGHT ON SCROLL
-// ==========================================================================
-const sections = document.querySelectorAll('section');
 
-window.addEventListener('scroll', () => {
-  let current = '';
+// =================================
+// BACK TO TOP
+// =================================
 
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 80; // হেডার অফসেট
-    if (window.pageYOffset >= sectionTop) {
-      current = section.getAttribute('id');
+const backToTop = document.querySelector(".back-to-top");
+
+if (backToTop) {
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 500) {
+
+            backToTop.classList.add("show");
+
+        } else {
+
+            backToTop.classList.remove("show");
+
+        }
+
+    });
+
+
+    backToTop.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
+
+
+// =================================
+// HEADER SCROLL EFFECT
+// =================================
+
+const header = document.querySelector(".header");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 50) {
+
+        header.style.background =
+            "rgba(5, 9, 16, 0.97)";
+
+    } else {
+
+        header.style.background =
+            "rgba(8, 12, 20, 0.88)";
+
     }
-  });
 
-  links.forEach(link => {
-    link.classList.remove('active-link');
-    if (link.getAttribute('href') === `#${current}`) {
-      link.classList.add('active-link');
-    }
-  });
+});
+
+
+// =================================
+// SMOOTH SCROLL
+// =================================
+
+navLinksItems.forEach(link => {
+
+    link.addEventListener("click", event => {
+
+        const targetId =
+            link.getAttribute("href");
+
+        if (!targetId.startsWith("#")) {
+            return;
+        }
+
+        const target =
+            document.querySelector(targetId);
+
+        if (!target) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const headerHeight =
+            header.offsetHeight;
+
+        const targetPosition =
+            target.offsetTop - headerHeight;
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth"
+        });
+
+    });
+
 });
