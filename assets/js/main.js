@@ -1,42 +1,67 @@
-// ===== MOBILE MENU TOGGLE =====
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
+/* ===== MAIN JAVASCRIPT ===== */
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-// ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
-const links = document.querySelectorAll('.nav-links li a');
+    /* ===== 1. SMOOTH SCROLLING FOR NAVBAR LINKS ===== */
+    const navLinks = document.querySelectorAll('.nav-links a, .hero-content a[href^="#"]');
 
-links.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-        targetSection.scrollIntoView({
-            behavior: 'smooth'
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            
+            // কেবল হ্যাশ বা পেজের ভেতরের সেকশন লিংকের জন্য কাজ করবে
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const elementPosition = targetSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
+    });
 
-        // Close menu on mobile after click
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
+    /* ===== 2. ACTIVE NAVBAR LINK ON SCROLL ===== */
+    const sections = document.querySelectorAll('section[id]');
+
+    function highlightNavOnScroll() {
+        const scrollY = window.pageYOffset;
+        const headerHeight = document.getElementById('header').offsetHeight;
+
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - headerHeight - 50;
+            const sectionId = current.getAttribute('id');
+            const navItem = document.querySelector(`.nav-links a[href*="${sectionId}"]`);
+
+            if (navItem) {
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navItem.classList.add('active');
+                } else {
+                    navItem.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNavOnScroll);
+
+    /* ===== 3. NAVBAR SHADOW ON SCROLL ===== */
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
         }
     });
-});
 
-// ===== FADE-IN ANIMATION ON SCROLL =====
-const sections = document.querySelectorAll('section');
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
-    });
-}, { threshold: 0.2 });
-
-sections.forEach(section => {
-    section.classList.add('fade-section');
-    observer.observe(section);
 });
